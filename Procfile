@@ -1,1 +1,1 @@
-web: nom run build
+web: yarn build
