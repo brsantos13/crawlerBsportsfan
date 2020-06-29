@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jogos</title>
+    <link rel="stylesheet" href="/CSS/style.css">
+  </head>
+  <body>
+
+    <div class="menu">
+      <h3>
+        <a href="/">Início</a>
+        <a href="/list/games">Listagem de Jogos</a>
+        <a href="/rank">Ranking</a>
+      </h3>
+    </div>
+
+    <div>
+      <form action="/search" method="get">
+        <h2 id ="selection">
+          Selecione o Jogador:
+          <select name="player">
+            {% for player in players %}
+              {% if player == playerselected %}
+                <option value="{{player}}" selected="selected">{{player}}</option>
+              {% else %}
+                <option value="{{player}}">{{player}}</option>
+              {% endif %}
+            {% endfor %}
+          </select>
+          <button type="submit">Pesquisar</button>
+        </h2>
+      </form>
+    </div>
+
+    {% if games %}
+
+      <table class="table">
+
+        <thead >
+          <tr class="head">
+
+            <th>Dia</th>
+            <th>Hora</th>
+            <th>Primeiro Jogar</th>
+            <th>Segundo Jogar</th>
+            <th>Placar</th>
+
+          </tr>
+        </thead>
+
+        {% for game in games %}
+          <tbody>
+
+            <tr class="body">
+              <td>{{game.day}}</td>
+              <td>{{game.hour}}</td>
+              <td>
+                <a href="/show/{{game.play1}}">{{game.play1}}</a>
+              </td>
+              <td>
+                <a href="/show/{{game.play2}}">{{game.play2}}</a>
+              </td>
+              <td>{{game.rslplay1}}
+                x
+                {{game.rslplay2}}</td>
+            </tr>
+
+          </tbody>
+        {% endfor %}
+      </table>
+    {% endif %}
+  </body>
+</html>

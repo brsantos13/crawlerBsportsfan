@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ranking</title>
+    <link rel="stylesheet" href="/CSS/style.css">
+  </head>
+  <body>
+
+    <div class="menu">
+      <h3>
+        <a href="/">Início</a>
+        <a href="/list/games">Listagem de Jogos</a>
+        <a href="/rank">Ranking</a>
+
+      </h3>
+    </div>
+
+    <div>
+      <form action="/rank/order" method="POST">
+        <h3 id="selection">Ordernar Por:
+          <select name="order">
+            <option value="quantityvictory" {% if order == "quantityvictory" %} selected="selected" {% endif %}>Vitorias</option>
+            <option value="quantitydefeat" {% if order == "quantitydefeat" %} selected="selected" {% endif %}>Derrotas</option>
+            <option value="quantitytie" {% if order == "quantitytie" %} selected="selected" {% endif %}>Empater</option>
+            <option value="averagegoalsmatch" {% if order == "averagegoalsmatch" %} selected="selected" {% endif %}>Média de Gols</option>
+            <option value="quantityvictorybyteam" {% if order == "quantityvictorybyteam" %} selected="selected" {% endif %}>Vitorias por Time</option>
+            <option value="quantitydefeatbyteam" {% if order == "quantitydefeatbyteam" %} selected="selected" {% endif %}>Derrotas por Time</option>
+            <option value="quantitytiebyteam" {% if order == "quantitytiebyteam" %} selected="selected" {% endif %}>Empates por Time</option>
+            <option value="averagegoalsmatchbyteam" {% if order == "averagegoalsmatchbyteam" %} selected="selected" {% endif %}>Média de Gols por Time</option>
+          </select>
+          <button type="submit">Listar</button>
+        </h3>
+      </form>
+    </div>
+
+    {% if listPlayers %}
+
+      <div>
+
+        <table class="table show">
+
+          <thead>
+
+            <tr class="head show">
+
+              <th>Colocação</th>
+              <th>Jogador</th>
+              <th>Qtd. Vitorias</th>
+              <th>Qtd. Derrotas</th>
+              <th>Qtd. Empates</th>
+              <th>Média de Gols</th>
+
+            </tr>
+
+          </thead>
+
+          <tbody>
+
+            {% for player in listPlayers %}
+              <tr class="body show">
+                <td>{{loop.index}}</td>
+                <td>
+                  <a href="/show/{{player.name}}">{{player.name}}</a>
+                </td>
+                <td>{{player.percentegevictory * 100}}%</td>
+                <td>{{player.percentegedefeat * 100}}%</td>
+                <td>{{player.percentegetie * 100}}%</td>
+                <td>{{player.averagegoalsmatch}}</td>
+              </tr>
+            {% endfor %}
+
+          </tbody>
+
+        </table>
+
+      </div>
+
+    {% endif %}
+
+  </body>
+</html>

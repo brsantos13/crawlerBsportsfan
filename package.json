@@ -1,0 +1,27 @@
+{
+  "name": "crawler",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/server.js",
+  "dependencies": {
+    "cheerio": "^1.0.0-rc.3",
+    "date-fns": "^2.0.0-beta.5",
+    "express": "^4.17.1",
+    "nunjucks": "^3.2.1",
+    "request": "^2.88.2"
+  },
+  "devDependencies": {
+    "browser-sync": "^2.26.7",
+    "nodemon": "^2.0.4",
+    "npm-run-all": "^4.1.5"
+  },
+  "scripts": {
+    "debug": "nodemon --inspect=0.0.0.0:9229 src/server.js",
+    "start": "npm-run-all -p nodemon browsersync",
+    "nodemon": "nodemon src/server.js",
+    "browsersync": "browser-sync start --proxy http://localhost:5000 --files 'public,src/appviews' "
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
