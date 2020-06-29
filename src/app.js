@@ -1,6 +1,7 @@
 const express = require("express");
 const nunjucks = require("nunjucks");
 const routes = require("./routes");
+const cors = require('cors')
 
 class App {
   constructor() {
@@ -10,6 +11,7 @@ class App {
   }
 
   middlewares() {
+    this.server.use(cors())
     this.server.use(express.urlencoded({extended:true}));
     this.server.use(express.static("public"));
     this.server.set("view engine", "njk");
